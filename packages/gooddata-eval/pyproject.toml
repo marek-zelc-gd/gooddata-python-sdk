@@ -30,7 +30,9 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-llm-judge = ["openai>=1.40,<2.0"]
+# >=1.45: max_completion_tokens (which _llm_judge now always sends) does not exist in
+# 1.40-1.44 and create() has no **kwargs there, so every judge call would TypeError.
+llm-judge = ["openai>=1.45,<2.0"]
 
 [project.scripts]
 gd-eval = "gooddata_eval.cli.main:main"
